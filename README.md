@@ -14,7 +14,7 @@ bower install --save hamburger-button
 
 If used _bower_ include script into your page:
 
-```
+```html
 <srcipt src="bower_components/hamburger-button/index.js"></script>
 ```
 
@@ -28,7 +28,7 @@ Insert html code
 
 Initialize script
 
-```
+```javascript
 import hamburgerButton from 'hamburger-button'; // if used NPM
 
 let hamburder = hamburgerButton({
@@ -45,7 +45,7 @@ hamburder.close();  // Close menu
 
 Include scss-mixin into your styles and exec it:
 
-```
+```scss
 import './bower_components/hamburger-button/hamburger.scss'; // with BOWER
 import './node_modules/hamburger-button/hamburger.scss'; // with NPM
 
