@@ -1,0 +1,77 @@
+////
+/// @author delphinpro <delphinpro@gmail.com>
+/// @copyright copyright © 2017 delphinpro
+/// @license licensed under the MIT license
+////
+
+@mixin makeHamburgerButton($opts: ()) {
+
+  // settings
+  $hamburger-background: if(map_get($opts, background), map_get($opts, background), transparent);
+  $hamburger-width: if(map_get($opts, width), map_get($opts, width), 50px);
+  $hamburger-height: if(map_get($opts, height), map_get($opts, height), 50px);
+  $hamburger-icon-width: if(map_get($opts, icon-width), map_get($opts, icon-width), $hamburger-width * 0.5);
+  $hamburger-icon-height: if(map_get($opts, icon-height), map_get($opts, icon-height), $hamburger-height * 0.36);
+  $hamburger-icon-item-space-chunk: if(map_get($opts, icon-item-space-chunk), map_get($opts, icon-item-space-chunk), 2);
+  $hamburger-icon-item-height: if(map_get($opts, icon-item-height), map_get($opts, icon-item-height), $hamburger-icon-height / (2 * $hamburger-icon-item-space-chunk + 3));
+  $hamburger-icon-item-space: if(map_get($opts, icon-item-space), map_get($opts, icon-item-space), $hamburger-icon-item-height * $hamburger-icon-item-space-chunk);
+  $hamburger-icon-color: if(map_get($opts, icon-color), map_get($opts, icon-color), currentColor);
+  $hamburger-main-class: if(map_get($opts, main-class), map_get($opts, main-class), '.hamburger');
+  $hamburger-state-active-class: if(map_get($opts, state-active-modifier), map_get($opts, state-active-modifier), _state_active);
+
+  #{$hamburger-main-class} {
+    // styles
+    background: $hamburger-background;
+    width: $hamburger-width;
+    height: $hamburger-height;
+    overflow: hidden;
+    position: relative;
+
+    // center line
+    span {
+      top: 0;
+      left: 0;
+      right: 0;
+      bottom: 0;
+      margin: auto;
+      position: absolute;
+      width: $hamburger-icon-width;
+      height: $hamburger-icon-item-height;
+      display: block;
+      text-indent: -9999px;
+
+      &::before, &::after {
+        content: '';
+        width: $hamburger-icon-width;
+        height: $hamburger-icon-item-height;
+        background: $hamburger-icon-color;
+        position: absolute;
+        left: 0;
+        top: 0;
+        transition: 0.5s ease;
+      }
+    }
+
+    // top and bottom lines
+    span > span {
+      &::before, &::after { transition-duration: 0.2s; }
+      &::before { transform: translateY(-100% * ($hamburger-icon-item-space-chunk + 1)); }
+      &::after { transform: translateY(100% * ($hamburger-icon-item-space-chunk + 1)); }
+    }
+
+    &#{$hamburger-state-active-class} {
+      // center line
+      > span {
+        &::before { transform: rotate(45deg); }
+        &::after { transform: rotate(-45deg); }
+      }
+      // top and bottom lines
+      > span > span {
+        &::before, &::after {
+          transform: translateY(0);
+          opacity: 0;
+        }
+      }
+    }
+  }
+}

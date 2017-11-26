@@ -1,0 +1,22 @@
+{
+  "name": "hamburger-button",
+  "main": "index.js",
+  "authors": [
+    "delphinpro <delphinpro@gmail.com>"
+  ],
+  "description": "Simple hamburger button",
+  "keywords": [
+    "hamburger",
+    "menu",
+    "button"
+  ],
+  "license": "MIT",
+  "homepage": "",
+  "ignore": [
+    "**/.*",
+    "node_modules",
+    "bower_components",
+    "test",
+    "tests"
+  ]
+}
