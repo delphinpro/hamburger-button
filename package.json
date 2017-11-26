@@ -5,6 +5,10 @@
   "scripts": {
     "start": "./node_modules/.bin/webpack"
   },
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/delphinpro/hamburger-button.git"
+  },
   "keywords": [
     "hamburger",
     "button"

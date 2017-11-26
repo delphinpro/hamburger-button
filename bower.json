@@ -1,6 +1,9 @@
 {
   "name": "hamburger-button",
-  "main": "index.js",
+  "main": [
+    "index.js",
+    "hamburger.scss"
+  ],
   "authors": [
     "delphinpro <delphinpro@gmail.com>"
   ],
