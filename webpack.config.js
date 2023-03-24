@@ -1,36 +1,64 @@
-const path = require('path');
+const path           = require('path');
+const webpack        = require('webpack');
+const UglifyJsPlugin = require('uglifyjs-webpack-plugin');
+const pkg            = require('./package.json');
+
+const banner = `Hamburger button
+@author      ${pkg.author}
+@copyright   copyright © 2017—2018 delphinpro
+@license     licensed under the ${pkg.license} license
+@version     ${pkg.version}
+
+https://github.com/delphinpro/hamburger-button`;
 
 module.exports = {
-  entry: './index.src.js',
+    mode: 'production',
+    watch: true,
 
-  output: {
-    path         : path.resolve(__dirname),
-    filename     : 'index.js',
-    library      : 'hamburgerButton',
-    libraryTarget: 'umd',
-  },
+    entry: './src/hamburger.js',
 
-  module: {
-    rules: [
-      {
-        test   : /\.js$/,
-        loader : 'babel-loader',
-        options: {
-          presets: ['env'],
-          plugins: [
-            'transform-object-rest-spread',
-          ],
-        },
-      },
+    output: {
+        path         : path.join(__dirname, 'dist'),
+        filename     : 'hamburger.js',
+        libraryTarget: 'umd',
+    },
+
+    module: {
+        rules: [
+            {
+                test  : /\.js$/,
+                loader: 'babel-loader',
+            },
+        ],
+    },
+
+    resolve: {
+        modules   : ['node_modules'],
+        extensions: ['.js'],
+    },
+
+    optimization: {
+        minimizer: [
+            new UglifyJsPlugin({
+                sourceMap    : false,
+                parallel     : true,
+                uglifyOptions: {
+                    warnings: false,
+                    output  : {
+                        comments: /^\**!|@preserve/,
+                    },
+                },
+            }),
+        ],
+    },
+
+    plugins: [
+        new webpack.BannerPlugin({
+            banner,
+        }),
     ],
-  },
 
-  resolve: {
-    modules   : ['node_modules'],
-    extensions: ['.js'],
-  },
+    context: __dirname,
 
-  context: __dirname,
-
-  target : 'web',
+    target: 'web',
 };

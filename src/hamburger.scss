@@ -4,6 +4,8 @@
 /// @license licensed under the MIT license
 ////
 
+@use "sass:math";
+
 @mixin makeHamburgerButton($opts: ()) {
 
   // settings
@@ -13,7 +15,7 @@
   $hamburger-icon-width: if(map_get($opts, icon-width), map_get($opts, icon-width), $hamburger-width * 0.5);
   $hamburger-icon-height: if(map_get($opts, icon-height), map_get($opts, icon-height), $hamburger-height * 0.36);
   $hamburger-icon-item-space-chunk: if(map_get($opts, icon-item-space-chunk), map_get($opts, icon-item-space-chunk), 2);
-  $hamburger-icon-item-height: if(map_get($opts, icon-item-height), map_get($opts, icon-item-height), $hamburger-icon-height / (2 * $hamburger-icon-item-space-chunk + 3));
+  $hamburger-icon-item-height: if( map_get($opts, icon-item-height), map_get($opts, icon-item-height), math.div($hamburger-icon-height, 2 * $hamburger-icon-item-space-chunk + 3) );
   $hamburger-icon-item-space: if(map_get($opts, icon-item-space), map_get($opts, icon-item-space), $hamburger-icon-item-height * $hamburger-icon-item-space-chunk);
   $hamburger-icon-color: if(map_get($opts, icon-color), map_get($opts, icon-color), currentColor);
   $hamburger-main-class: if(map_get($opts, main-class), map_get($opts, main-class), '.hamburger');
